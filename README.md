@@ -1,21 +1,18 @@
-# getNF
+# Termux-NF
 
-## A better way to install NerdFonts
+## A better way to install NerdFonts on Termux
 
 ### Dependencies
 
-- curl
-- fontconfig
-- ncurses
-- unzip
+```
+pkg install curl ncurses-utils zip
+```
 
 ### Installation
 
 ```
-curl -fsSL https://raw.githubusercontent.com/getnf/getnf/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/arnavgr/termux-nf/main/install.sh | bash
 ```
-
-Make sure that `~/.local/bin` is in your PATH.
 
 ### Usage
 
@@ -45,5 +42,5 @@ Enjoy!
 
 You can suppress the installation output with a flag `--silent` or `-s`:
 ```
-curl -fsSL https://raw.githubusercontent.com/getnf/getnf/main/install.sh | bash -s -- --silent
+curl -fsSL https://raw.githubusercontent.com/arnavgr/termux-nf/main/install.sh | bash -s -- --silent
 ```

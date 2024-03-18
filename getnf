@@ -3,10 +3,12 @@
 # shellcheck disable=SC2164
 
 # Defining variables
+PREFIX='/data/data/com.termux/files/usr'
 nerdfontsrepo='https://api.github.com/repos/ryanoasis/nerd-fonts'
-dist_dir="$HOME/.local/share/fonts"
-down_dir="$(command -v xdg-user-dir > /dev/null && xdg-user-dir DOWNLOAD || echo "$HOME/Downloads")/NerdFonts"
-cache_dir="${XDG_CACHE_HOME:-$HOME/.cache}/nerdFonts"
+dist_dir="$PREFIX/share/termux-nf/fonts"
+down_dir="$HOME/share/termux-nf/Downloads"
+cache_dir="/data/data/com.termux/cache"
+TERMUX_DIR="$HOME/.termux/font.ttf"
 # Set the name of the file to store the release number
 release_file="$cache_dir/release.txt"
 # Define a file for the installed fonts names to be stored in
@@ -21,16 +23,10 @@ RED=$(tput setaf 1)
 GREEN=$(tput setaf 2)
 RESET=$(tput sgr0)
 
-# For Macs, need to set a few different things
-if [[ "$(uname)" == "Darwin" ]]; then
-    dist_dir="$HOME/Library/Fonts"
-    cache_dir="$HOME/Library/Caches/NerdFonts"
-fi
-
 # Help message
 usage() {
     cat << EOF
-getNF: A Better way to install NerdFonts
+Termux-NF: A Better way to install NerdFonts on Termux
 
 Usage:
   getnf [options]
@@ -130,12 +126,6 @@ remove_zip_files() {
     confirm "Downloaded zip files removal succeeded!"
 }
 
-update_font_cache() {
-    info "Updating fc-cache..."
-    fc-cache -f 2>&1
-    confirm "fc-cache: update succeeded!"
-}
-
 install_font() {
     pushd "$down_dir" > /dev/null
     # Remove the zip file of the download font if it exists due to curl not having an overwrite function
@@ -165,15 +155,12 @@ direct_install() {
 }
 
 post_install() {
-    # Update the fonts cache
-    update_font_cache
-    # Remove downloaded archives if the option -k was not passed
+   # Remove downloaded archives if the option -k was not passed
     if [[ "$keepZipFiles" == "False" ]]; then
         remove_zip_files
     else
         confirm "The downloaded zip files can be found in $down_dir"
     fi
-    confirm "Enjoy your new fonts!"
 }
 
 menu() {
@@ -286,7 +273,7 @@ termux() {
     		# List the files numerically
     		echo "${BLUE}List of Installed Fonts:${RESET}"
     		for i in "${!files[@]}"; do
-        echo "${BLUE}$((i+1)). ${files[$i]}${RESET}"
+                echo "${BLUE}$((i+1)). ${files[$i]}${RESET}"
     		done
 }
 
