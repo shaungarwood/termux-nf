@@ -1,0 +1,92 @@
+#!/bin/bash
+
+readonly VERSION="v0.2.0"
+
+readonly NERDFONTSAPI='https://api.github.com/repos/ryanoasis/nerd-fonts'
+readonly NERDFONTSREPO='https://github.com/ryanoasis/nerd-fonts'
+
+readonly DOWN_DIR="$HOME/share/termux-nf/Downloads"
+
+readonly GETNF_DIR="$PREFIX/share/termux-nf"
+readonly FONT_RELEASES_DIR="$GETNF_DIR/releases"
+readonly RELEASE_FILE="$GETNF_DIR/release.txt"
+readonly ALL_FONTS_FILE="$GETNF_DIR/all_fonts.txt"
+
+PREFIX='/data/data/com.termux/files/usr'
+
+NEW_RELEASE_AVAILABLE='false'
+OPERATE_GLOBALLY='false'
+KEEP_FONT_ARCHIVES='false'
+INCLUDE_INSTALLED_FONTS='false'
+UPDATE_INSTALLED_FONTS='false'
+DISPLAY_INSTALLED_FONTS='false'
+DISPLAY_ALL_FONTS='false'
+
+if command -v tput > /dev/null; then
+    # tput is part of the ncurses package
+    # Colors: https://www.ditig.com/publications/256-colors-cheat-sheet
+    readonly OLIVE=$(tput setaf 3)
+    readonly RED=$(tput setaf 9)
+    readonly GREEN=$(tput setaf 2)
+    readonly RESET=$(tput sgr0)
+fi
+
+display_help() {
+    cat << EOF
+Termux-NF: A Better way to install NerdFonts on Termux
+
+Usage:
+  getnf [options]
+
+OPTIONS:
+  -h          display this help message
+  -k          keep the downloaded font archives
+  -a          show already installed Nerd Fonts in the menu
+  -g          install/uninstall/list/update Nerd Fonts for all users
+  -l          show the list of installed Nerd Fonts
+  -L          show the list of all Nerd Fonts
+  -i <font>   directly install the specified Nerd Fonts
+  -u <font>   uninstall the specified Nerd Fonts
+  -U          update all installed Nerd Fonts
+  -V          display current getnf version
+
+To install fonts using the menu:
+- Choose one or more fonts (by index/number) to install
+- Hit Return/Enter to install the selected fonts
+- Type 'q' to quit
+
+To install fonts directly:
+- Get the exact name of a font from the menu
+- Use 'getnf -i "<font-name>"' to install a font
+- Use 'getnf -i "<name1>,<name2>"' to install multiple fonts
+
+To uninstall fonts use the same syntax as for direct install.
+
+To install, uninstall, list, update fonts for all users use -gi, -gu, -gl, -gU.
+EOF
+}
+
+info() {
+    printf "%s\n" "$1"
+}
+
+title() {
+    printf "\n${OLIVE}%b${RESET}\n" "$1"
+}
+
+confirm() {
+    printf "${GREEN}%b${RESET}\n" "$1"
+}
+
+alert() {
+    printf "${RED}%b${RESET}\n" "$1"
+}
+
+error() {
+    alert "$1" >&2
+    exit 1
+}
+
+
+
+
