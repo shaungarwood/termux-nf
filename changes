@@ -1,8 +1,12 @@
 #!/bin/bash
 
-PREFIX='/data/data/com.termux/files/usr'
+# To check if Termux is being used
+if [ $(ps -ef| grep -c com.termux) -eq 0 ]; then
+	echo "please make sure that you are using termux, this script is only made for termux"
+	exit 0
+fi
 
-readonly VERSION="v0.2.0"
+PREFIX='/data/data/com.termux/files/usr'
 
 readonly NERDFONTSAPI='https://api.github.com/repos/ryanoasis/nerd-fonts'
 readonly NERDFONTSREPO='https://github.com/ryanoasis/nerd-fonts'
@@ -49,7 +53,6 @@ OPTIONS:
   -i <font>   directly install the specified Nerd Fonts
   -u <font>   uninstall the specified Nerd Fonts
   -U          update all installed Nerd Fonts
-  -V          display current getnf version
 
 To install fonts using the menu:
 - Choose one or more fonts (by index/number) to install
@@ -472,7 +475,7 @@ post_install() {
     else
         info "The downloaded font archives can be found in $DOWN_DIR"
     fi
-    confirm "Enjoy your new fonts!"
+    source ./termux
 }
 
 #######################################
@@ -544,16 +547,6 @@ display_installed_fonts() {
     done
 }
 
-#######################################
-# Display getnf release version
-# Globals:
-#   VERSION
-# Arguments:
-#   None
-#######################################
-display_getnf_version() {
-    echo "getnf $VERSION"
-}
 
 #######################################
 # Display the list of all fonts
@@ -676,7 +669,6 @@ main() {
             i) readonly FONTNAMES="$OPTARG" ;;
             u) uninstall_fonts "$OPTARG" && exit 0 ;;
             U) readonly UPDATE_INSTALLED_FONTS='true' ;;
-            V) display_getnf_version && exit 0 ;;
             :) error "Option '-$OPTARG' requires at least one font name." ;;
             *) display_help && exit 0 ;;
         esac
