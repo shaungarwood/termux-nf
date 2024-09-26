@@ -1,46 +1,53 @@
-# Termux-NF
+# `termux-nf` - Get Nerd Fonts on termux
 
-## A better way to install NerdFonts on Termux
+## Supported Platforms
+`termux-nf` is meant to install and apply fonts specifically for termux. This script should used in termux only
 
-### Dependencies
+## Dependencies
 
 ```
 pkg install curl ncurses-utils zip
 ```
 
-### Installation
+## Installation
 
+Run
 ```
-curl -fsSL https://raw.githubusercontent.com/arnavgr/termux-nf/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/getnf/getnf/main/install.sh | bash
 ```
 
-### Usage
+You can suppress the installation output with the flag `--silent` or `-s`:
+```
+curl -fsSL https://raw.githubusercontent.com/getnf/getnf/main/install.sh | bash -s -- --silent
+```
 
-Run `getnf -h` to get a help message.
+## Usage
+Run `getnf` to show the font menu.
 
-- run `getnf` from the terminal and it will present you with a list of Nerd Fonts
-- choose one or more fonts (by index/number) to install
-- hit Return/Enter to install the selected fonts
-- type 'q' to quit
+There are several flags available:
 
-By default the downloaded zip files are removed,
-use the `-k` flag to keep the zip files in the downloads directory.
+| Flag                                             | Description                                                                |
+| ------------------------------------------------ | -------------------------------------------------------------------------- |
+| `-h`                                             | Show the help message                                                      |
+| `-k`                                             | Keep the downloaded font archives                                          |
+| `-a`                                             | Include installed Nerd Fonts in the menu                                   |
+| `-g`                                             | Install/Uninstall/List/Update Nerd Fonts for all users                     |
+| `-l`                                             | List installed Nerd Fonts                                                  |
+| `-L`                                             | List all Nerd Fonts                                                        |
+| `-f`                                             | Select and install Nerd Fonts using [fzf](https://github.com/junegunn/fzf) |
+| `-i <font>`                                      | Directly install a specified Nerd Font                                     |
+| `-i <name1>,<name2>`,<br> `-i "<name1> <name2>"` | Directly install multiple Nerd Fonts                                       |
+| `-u <font>`                                      | Uninstall a specified Nerd Font                                            |
+| `-u <name1>,<name2>`,<br> `-u "<name1> <name2>"` | Uninstall multiple Nerd Fonts                                              |
+| `-U`                                             | Update all installed Nerd Fonts                                            |
 
-By default, the already installed fonts are not listed in the select menu,
-unless there is a new version of Nerd Fonts.
-You can force reinstalling a font by using the `-f` flag.
-
-If you know the exact font you want to install,
-you can do it directly with `getnf -i <font-name>`.<br>
-Use `getnf -i <name1>,<name2>` or `getnf -i "<name1> <name2>"`
-to install multiple fonts.<br>
-You can get the names of the fonts from the menu.
+You can get the exact names of the fonts to use with `-i` and `-u` from `getnf -L`.
 
 Enjoy!
 
-### Notes
+### Applying the fonts
+After installing the fonts u are automatically given an option to apply the fonts, u can also do so manually to change your fonts using
+```
+applynf
+```
 
-You can suppress the installation output with a flag `--silent` or `-s`:
-```
-curl -fsSL https://raw.githubusercontent.com/arnavgr/termux-nf/main/install.sh | bash -s -- --silent
-```
