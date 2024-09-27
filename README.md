@@ -13,12 +13,12 @@ pkg install curl ncurses-utils zip
 
 Run
 ```
-curl -fsSL https://raw.githubusercontent.com/getnf/getnf/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/arnavgr/termux-nf/main/install.sh | bash
 ```
 
 You can suppress the installation output with the flag `--silent` or `-s`:
 ```
-curl -fsSL https://raw.githubusercontent.com/getnf/getnf/main/install.sh | bash -s -- --silent
+curl -fsSL https://raw.githubusercontent.com/arnavgr/termux-nf/main/install.sh | bash -s -- --silent
 ```
 
 ## Usage
@@ -34,7 +34,6 @@ There are several flags available:
 | `-g`                                             | Install/Uninstall/List/Update Nerd Fonts for all users                     |
 | `-l`                                             | List installed Nerd Fonts                                                  |
 | `-L`                                             | List all Nerd Fonts                                                        |
-| `-f`                                             | Select and install Nerd Fonts using [fzf](https://github.com/junegunn/fzf) |
 | `-i <font>`                                      | Directly install a specified Nerd Font                                     |
 | `-i <name1>,<name2>`,<br> `-i "<name1> <name2>"` | Directly install multiple Nerd Fonts                                       |
 | `-u <font>`                                      | Uninstall a specified Nerd Font                                            |
