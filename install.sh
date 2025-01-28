@@ -23,8 +23,10 @@ else
     curl -fL# https://raw.githubusercontent.com/arnavgr/termux-nf/main/applynf --output applynftemp
 fi
 
-mv getnftemp "$GETNFLOC"
-mv applynftemp "$GETNFLOC"
-chmod 755 "$GETNFLOC"
+mv getnftemp "$DEST/getnf" 
+mv applynftemp "$DEST/applynf"  
+chmod 755 "$DEST/getnf"  
+chmod 755 "$DEST/applynf"
+
 
 $SILENT || echo "${GREEN}Installation finished${RESET}"
