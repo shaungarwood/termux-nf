@@ -2,7 +2,6 @@
 
 PREFIX='/data/data/com.termux/files/usr'
 DEST="$PREFIX/bin"
-GETNFLOC="$DEST/getnf"
 
 GREEN=$(tput setaf 2)
 RESET=$(tput sgr0)
