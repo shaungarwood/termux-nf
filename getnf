@@ -475,7 +475,7 @@ post_install() {
     else
         info "The downloaded font archives can be found in $DOWN_DIR"
     fi
-    source ./applynf
+    applynf
 }
 
 #######################################
