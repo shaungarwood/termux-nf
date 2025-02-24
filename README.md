@@ -6,7 +6,7 @@
 ## Dependencies
 
 ```
-pkg install curl ncurses-utils 
+pkg install curl ncurses-utils xz-utils
 ```
 
 ## Installation
